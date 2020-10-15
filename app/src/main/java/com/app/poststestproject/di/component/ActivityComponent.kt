@@ -12,5 +12,5 @@ import dagger.Component
 )
 interface ActivityComponent {
 
-    fun inject(activity: PostsActivity)
+    //fun inject(activity: PostsActivity)
 }

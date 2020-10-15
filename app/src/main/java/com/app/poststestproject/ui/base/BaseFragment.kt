@@ -22,6 +22,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(buildFragmentComponent())
         super.onCreate(savedInstanceState)
+        retainInstance = true
         setupObservers()
         viewModel.onCreate()
     }

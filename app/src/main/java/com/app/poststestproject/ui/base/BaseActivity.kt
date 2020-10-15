@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.app.poststestproject.PostsApp
 import com.app.poststestproject.di.component.ActivityComponent
 import com.app.poststestproject.di.component.DaggerActivityComponent

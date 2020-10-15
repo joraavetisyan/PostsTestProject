@@ -8,6 +8,7 @@ import com.app.poststestproject.ui.base.BaseViewModel
 import com.app.poststestproject.utils.common.Resource
 import com.app.poststestproject.utils.network.NetworkHelper
 import com.app.poststestproject.utils.rx.SchedulerProvider
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 
 class PostsViewModel(
@@ -21,6 +22,8 @@ class PostsViewModel(
     private val isLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getPostsLiveData() = Transformations.map(mPostsLiveData) { it.data }
+
+    fun getLoadingLiveData() = isLoadingLiveData
 
     override fun onCreate() {
         if (checkInternetConnection()) {
@@ -39,6 +42,15 @@ class PostsViewModel(
                     }
                 )
             )
+        } else {
+            compositeDisposable.add(Single.just(postsRepository.fetchPosts())
+                .subscribeOn(schedulerProvider.io())
+                .map { it.blockingGet() }
+                .subscribe { t ->
+                    run {
+                        mPostsLiveData.postValue(Resource.success(t))
+                    }
+                })
         }
     }
 

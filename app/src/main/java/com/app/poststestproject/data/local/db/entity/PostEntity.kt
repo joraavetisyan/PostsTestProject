@@ -26,5 +26,10 @@ data class PostEntity(
 
     @ColumnInfo(name = "body")
     @NotNull
-    val body: String
+    val body: String,
+
+    @ColumnInfo(name = "is_favorite")
+    @NotNull
+    val isFavorite: Boolean
+
 )

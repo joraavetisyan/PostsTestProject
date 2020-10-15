@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.poststestproject.data.repository.PostsRepository
 import com.app.poststestproject.ui.base.BaseFragment
 import com.app.poststestproject.ui.posts.PostsAdapter
+import com.app.poststestproject.ui.posts.PostsFragment
 import com.app.poststestproject.ui.posts.PostsViewModel
 import com.app.poststestproject.utils.network.NetworkHelper
 import com.app.poststestproject.utils.rx.SchedulerProvider
@@ -24,7 +25,7 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
         schedulerProvider: SchedulerProvider,
         compositeDisposable: CompositeDisposable,
         networkHelper: NetworkHelper,
-        postsRepository: PostsRepository,
+        postsRepository: PostsRepository
     ): PostsViewModel =
         ViewModelProviders.of(fragment,
             ViewModelProviderFactory(PostsViewModel::class) {
@@ -33,6 +34,6 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
         ).get(PostsViewModel::class.java)
 
     @Provides
-    fun providePostsAdapter() = PostsAdapter(ArrayList())
+    fun providePostsAdapter() = PostsAdapter(ArrayList(), fragment as PostsFragment)
 
 }

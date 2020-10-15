@@ -9,5 +9,8 @@ class PostsRepository @Inject constructor(
     private val databaseService: DatabaseService
 ) {
 
-    fun fetchPosts() = networkService.doPostsCall().map { it.posts }
+    fun fetchPosts() = networkService.doPostsCall().map { it }
+
+    fun fetchLocalPosts() = databaseService.postsDao().getAll()
+
 }
